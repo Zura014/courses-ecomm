@@ -4,3 +4,10 @@
     display: block;
     pointer-events: all;
 }
+
+.cat-main-ul2:hover .cat-child-ul2 {
+    top:100%;
+    opacity: 100%;
+    display: block;
+    pointer-events: all;
+}
