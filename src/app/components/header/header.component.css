@@ -1,0 +1,6 @@
+.cat-main-ul:hover .cat-child-ul {
+    top:100%;
+    opacity: 100%;
+    display: block;
+    pointer-events: all;
+}
