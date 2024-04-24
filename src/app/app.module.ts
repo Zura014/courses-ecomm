@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -9,6 +9,10 @@ import { AboutComponent } from './pages/about/about.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
+import { BannerComponent } from './components/banner/banner.component';
+import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { AuthService } from './services/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,13 +22,21 @@ import { RegisterComponent } from './pages/register/register.component';
     AboutComponent,
     CoursesComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BannerComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,   
   ],
-  providers: [],
+  providers: [
+    provideHttpClient(withFetch()),
+    importProvidersFrom(HttpClientModule),
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
