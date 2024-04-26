@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -8,24 +8,18 @@ import { matchPassword } from '../../validators/passwordMatch.validator';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   banner: string = '../../../assets/page-title.jpg';
   router = inject(Router);
   authService = inject(AuthService);
 
-  registerForm: FormGroup;
-
+  loginForm: FormGroup;
+  isLoggedIn!: boolean;
 
   constructor() {
-
-    this.registerForm = new FormGroup({
-      username: new FormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(32),
-      ]),
+    this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
@@ -33,18 +27,31 @@ export class LoginComponent {
         passwordValidator(),
         Validators.maxLength(32),
       ]),
-      repeatPassword: new FormControl(''),
-      agreement: new FormControl(false, Validators.requiredTrue),
-    },
-      {
-        validators: matchPassword
-      }
-    );
+      rememberMe: new FormControl(false),
+    });
   }
 
-  signUp() {
-    console.log('zdbanda')
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
-
+  signIn() {
+    if (this.loginForm.valid) {
+      const user = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password,
+      };
+      this.authService
+      .signIn(user)
+      .subscribe((response) => {
+        try {
+          localStorage.setItem('accessToken', response.accessToken);
+          this.router.navigateByUrl('/');
+        } catch (error) {
+          alert('Invalid Credidentials!');
+          this.loginForm.controls['password'].reset();
+        }
+      });
+    }
+  }
 }

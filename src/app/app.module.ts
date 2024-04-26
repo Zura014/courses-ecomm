@@ -13,6 +13,7 @@ import { BannerComponent } from './components/banner/banner.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CoursesComponent,
     LoginComponent,
     RegisterComponent,
-    BannerComponent
+    BannerComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
