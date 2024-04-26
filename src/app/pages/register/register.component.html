@@ -1,9 +1,9 @@
 <app-banner title="register" path="sign up"></app-banner>
 <section class="w-full py-[100px]">
-    <div class="md:container mx-auto px-3">
+    <div class="md:container mx-auto sm:px-3">
         <div class="flex justify-center w-full h-full">
-            <div class="px-3 w-1/2">
-                <div class="p-[40px] border rounded-md border-borderC shadow-lg">
+            <div class="px-3 w-full md:w-1/2">
+                <div class="px-[20px] py-[40px] md:p-[40px] border rounded-md border-borderC shadow-lg">
                     <div class="text-center mb-[30px]">
                         <h2 class="capitalize text-[32px] mb-[16px] font-primaryFont text-heading font-bold block">sign
                             up</h2>
@@ -25,7 +25,7 @@
                                 class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" />
                         </div>
 
-                        <!--! username validation -->
+                        <!--? Username validation -->
 
                         <div class="invalid-data mb-[15px] text-text text-sm" *ngIf="
                             registerForm.controls['username'].invalid && 
@@ -69,7 +69,7 @@
                             </div>
                         </div>
 
-                        <!--!  ????  -->
+                        <!-- ? -->
 
                         <!-- Email -->
                         <div class="mb-[15px]">
@@ -84,7 +84,7 @@
                         </div>
 
 
-                        <!--! email validation -->
+                        <!--? Email validation -->
 
 
                         <div class="invalid-data mb-[15px] text-text text-sm" *ngIf="
@@ -128,7 +128,7 @@
                         </div>
 
 
-                        <!-- !!!! -->
+                        <!-- ? -->
 
 
 
@@ -148,7 +148,7 @@
                                 class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" />
                         </div>
 
-                        <!-- ! password validator -->
+                        <!-- ? Password validator -->
 
                         <div class="invalid-data mb-[15px] text-text text-sm" *ngIf="
                         registerForm.controls['password'].invalid &&
@@ -201,7 +201,7 @@
                 </div>
 
 
-                        <!-- !!!! -->
+                        <!-- ? -->
 
 
                         <!-- Re-Enter Password -->
@@ -217,11 +217,11 @@
                         </div>
 
 
-                        <!-- !!!!  -->
+                        <!-- ? Repeat Password Validator -->
                         
                         <div class="invalid-data mb-[15px] text-text text-sm">
 
-                            <div class="flex items-center" *ngIf="registerForm.hasError('passwordMismatch') && registerForm.get('repeatPassword')?.dirty">
+                            <div class="flex items-center" *ngIf="registerForm.errors?.['passwordMatch'] && registerForm.get('repeatPassword')?.touched">
                                 <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
                                     viewBox="0 0 32 32" width="15" xml:space="preserve"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -235,20 +235,39 @@
                                         </g>
                                     </g>
                                 </svg>
-                                Email is required
+                                Passwords do not match!
                             </div>
                         </div>
 
                         
-                        <!-- !!!!  -->
+                        <!-- ? -->
                         
                         <!-- terms agreement -->
                         <div class="text-text mb-[15px] py-[8px]">
-                            <input type="checkbox" />
+                            <input type="checkbox" formControlName="agreement" />
                             <span>
                                 Accept the Terms and Privacy Policy
                             </span>
+                            <!-- ? Checkbox Validation -->
+                            <div class="flex items-center mt-3" *ngIf="registerForm.get('agreement')?.invalid && registerForm.get('agreement')?.touched">
+                                <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
+                                    viewBox="0 0 32 32" width="15" xml:space="preserve"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g>
+                                        <g id="Error_1_">
+                                            <g id="Error">
+                                                <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
+                                                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                                                    id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                                <small class="text-text">You must agree to the terms and conditions.</small>
+                            </div>
+                            <!-- ? -->
                         </div>
+
                         <!-- submit button -->
                         <div class="mb-[15px]">
                             <button type="submit"
