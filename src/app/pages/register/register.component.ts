@@ -53,12 +53,15 @@ export class RegisterComponent {
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
       };
-
+      try {
       this.authService
       .signUp(user)
       .subscribe(user => this.authService.signUp(user));
       this.registerForm.reset();
       this.router.navigateByUrl('/login');
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 }

@@ -25,7 +25,7 @@ export class AuthService {
   }
   
   signIn(user: any): Observable<{ accessToken: string }> {
-    return this.http.post<{ accessToken: string }>(this._signInUrL, user);
+    return this.http.post<{ accessToken: string }>('http://localhost:3000/auth/forgot-password', user);
   }
   
   forgotPassword(user: any): Observable<any> {

@@ -30,9 +30,11 @@ export class ForgotPasswordComponent {
   }
 
   forgotPassword() {
-    if(this.forgotPasswordForm){
-      const user = this.forgotPasswordForm.value;
-      
+    if(this.forgotPasswordForm.valid){
+      const user = {
+        email: this.forgotPasswordForm.value.email,
+        password: this.forgotPasswordForm.value.password,
+      }
       this.authService
       .forgotPassword(user)
       .subscribe( res => {
