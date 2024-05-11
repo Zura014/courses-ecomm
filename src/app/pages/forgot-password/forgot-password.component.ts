@@ -31,13 +31,10 @@ export class ForgotPasswordComponent {
 
   forgotPassword() {
     if(this.forgotPasswordForm.valid){
-      const user = {
-        email: this.forgotPasswordForm.value.email,
-        password: this.forgotPasswordForm.value.password,
-      }
+      const user = this.forgotPasswordForm.value;
       this.authService
       .forgotPassword(user)
-      .subscribe( res => {
+      .subscribe(() => {
         this.router.navigateByUrl('/login')
       });
     }
