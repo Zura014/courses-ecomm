@@ -14,6 +14,7 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     LoginComponent,
     RegisterComponent,
     BannerComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,
