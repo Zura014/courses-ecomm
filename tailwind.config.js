@@ -14,7 +14,7 @@ module.exports = {
       borderC: "#ddd"
     },
     screens: {
-      xs: "0",
+      xs: "420px",
       sm: "576px",
       md: "768px",
       lg: "992px",

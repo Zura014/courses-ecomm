@@ -10,3 +10,17 @@
     background-repeat: no-repeat;
     opacity: 0.9;
 }
+
+.hv-content {
+    opacity:0;
+    visibility: hidden;
+    transform: scale(0);
+}
+
+.hv-box:hover .hv-content {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    transition-duration: 0.4s;
+    transform-origin: center;
+}
