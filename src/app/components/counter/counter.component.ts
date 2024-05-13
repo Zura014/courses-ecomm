@@ -5,7 +5,9 @@ import { AfterViewInit, Component } from '@angular/core';
   templateUrl: './counter.component.html',
   styleUrl: './counter.component.css'
 })
-export class CounterComponent implements AfterViewInit{
+export class CounterComponent implements AfterViewInit {
+
+
   counters = [
     { name: 'counter1', start:0, end: 200, duration: 1000, value: 0, iteration: 1, },
     { name: 'counter2', start: 0, end: 1200, duration: 2000, value: 0, iteration: 3, },

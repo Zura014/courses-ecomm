@@ -1,0 +1,17 @@
+.hv-content {
+    transform: scale(1);
+    transition: all .4s ease-in-out;
+}
+
+.hv-box:hover .hv-content {
+    transform: scale(1.1);
+}
+
+.price-tag {
+    left: -30%;
+    transition: all .4s ease-in-out;
+}
+
+.hv-box:hover .price-tag {
+    left: 0;
+}
