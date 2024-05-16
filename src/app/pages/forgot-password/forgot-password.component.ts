@@ -31,7 +31,10 @@ export class ForgotPasswordComponent {
 
   forgotPassword() {
     if(this.forgotPasswordForm.valid){
-      const user = this.forgotPasswordForm.value;
+      const user = {
+        email: this.forgotPasswordForm.value.email,
+        new_password: this.forgotPasswordForm.value.password,
+      }
       this.authService
       .forgotPassword(user)
       .subscribe(() => {

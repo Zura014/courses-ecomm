@@ -27,7 +27,7 @@ import { CounterComponent } from './components/counter/counter.component';
     RegisterComponent,
     BannerComponent,
     ForgotPasswordComponent,
-    CounterComponent
+    CounterComponent,
   ],
   imports: [
     BrowserModule,
