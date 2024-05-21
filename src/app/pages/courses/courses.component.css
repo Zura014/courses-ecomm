@@ -8,10 +8,24 @@
 }
 
 .price-tag {
-    left: -30%;
+    left: -40%;
     transition: all .4s ease-in-out;
 }
 
 .hv-box:hover .price-tag {
     left: 0;
+}
+
+.dot-after::after {
+    position: absolute;
+    content: "";
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    bottom: 0px;
+    margin: auto;
+    width: 6px;
+    height: 6px;
+    background: #ddd;
+    border-radius: 100%;
 }
