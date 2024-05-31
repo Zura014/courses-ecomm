@@ -15,6 +15,7 @@ import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { CourseTemplateComponent } from './components/course-template/course-template.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CounterComponent } from './components/counter/counter.component';
     BannerComponent,
     ForgotPasswordComponent,
     CounterComponent,
+    CourseTemplateComponent,
   ],
   imports: [
     BrowserModule,
