@@ -1,10 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
+import { User } from '../shared/user.model';
+
+interface UserI {
+  username?: string;
+  email: string;
+  password: string;
+}
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   private _signUpUrL = 'http://localhost:3000/auth/signup';
   private _signInUrL = 'http://localhost:3000/auth/signin';
@@ -16,16 +24,20 @@ export class AuthService {
     this.accessToken = localStorage.getItem('accessToken') || '';
   }
 
-  signUp(user: {
-    username: string;
-    email: string;
-    password: string;
-  }): Observable<any> {
-    return this.http.post<any>(this._signUpUrL, user);
+  signUp(user: UserI): Observable<UserI> {
+    return this.http.post<UserI>(this._signUpUrL, user);
   }
   
-  signIn(user: any): Observable<{ accessToken: string }> {
-    return this.http.post<{ accessToken: string }>(this._signInUrL, user);
+  signIn(user: UserI): Observable<{ accessToken: string }> {
+    return this.http
+    .post<{ accessToken: string }>(this._signInUrL, user)
+    .pipe(
+      catchError(this.handleError),
+      tap(resData => {
+        localStorage.setItem('accessToken', resData.accessToken);
+        this.accessToken = resData.accessToken;
+      })
+    );
   }
   
   forgotPassword(user: any): Observable<any> {
@@ -48,5 +60,18 @@ export class AuthService {
   logOut(): void {
     localStorage.clear();
     window.location.reload();
+  }
+
+  private handleError(errorRes: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (!errorRes.error || !errorRes.error.error) {
+      return throwError(errorMessage);
+    }
+    switch (errorRes.error.error.message) {
+      case 'EMAIL_EXISTS':
+        errorMessage = 'This email exists already';
+        break;
+    }
+    return throwError(errorMessage);
   }
 }

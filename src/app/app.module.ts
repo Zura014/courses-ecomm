@@ -9,13 +9,13 @@ import { AboutComponent } from './pages/about/about.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { BannerComponent } from './components/banner/banner.component';
+import { BannerComponent } from './shared/banner/banner.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { CounterComponent } from './components/counter/counter.component';
-import { CourseTemplateComponent } from './components/course-template/course-template.component';
+import { CourseTemplateComponent } from './shared/course-template/course-template.component';
 
 @NgModule({
   declarations: [
