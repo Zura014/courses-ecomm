@@ -1,8 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -19,8 +18,23 @@ export class RegisterComponent {
   banner: string = '../../../assets/page-title.jpg';
   router = inject(Router);
   authService = inject(AuthService);
-
+  @ViewChild('adminOption', {static: false}) adminOption!: ElementRef;
+  @ViewChild('userOption', {static: false}) userOption!: ElementRef;
   registerForm: FormGroup;
+  roleSelected!: boolean;
+
+
+  isSelected(): boolean {
+    if(this.adminOption.nativeElement.selected || this.userOption.nativeElement.selected) {
+      console.log(this.roleSelected);
+      return this.roleSelected = true;
+      } 
+      else {
+        console.log(this.roleSelected);
+        return this.roleSelected = false;
+    }
+  }
+   
 
   constructor() {
     this.registerForm = new FormGroup(
@@ -39,6 +53,7 @@ export class RegisterComponent {
         ]),
         repeatPassword: new FormControl(''),
         agreement: new FormControl(false, Validators.requiredTrue),
+        role: new FormControl(Number, Validators.required)
       },
       {
         validators: matchPassword,
@@ -52,6 +67,7 @@ export class RegisterComponent {
         username: this.registerForm.value.username,
         email: this.registerForm.value.email,
         password: this.registerForm.value.password,
+        role: this.registerForm.value.role,
       };
       try {
       this.authService

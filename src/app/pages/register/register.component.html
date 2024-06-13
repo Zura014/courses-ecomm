@@ -242,6 +242,31 @@
                         
                         <!-- ? -->
                         
+                        <div class="py-3 relative">
+                            <label
+                                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold "
+                                for="">
+                                Please select a role
+                                <span>*</span>
+                            </label>
+                            <div class="z-10 top-1/2 absolute text-text pt-[2px] pl-[20px] left-2"
+                                [ngClass]="{'opacity-0 pointer-events-none': roleSelected}"    
+                            >
+                                <p class="text-text ">Roles:</p>
+                            </div>
+                            <select (change)="isSelected()" name="role" formControlName="role" 
+                                class="text-[black] py-[6px] w-full pl-[20px] placeholder:text-xl outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" 
+                                [ngClass]="{'text-[black]': !roleSelected}"
+                                >
+                                <option value="" selected hidden disabled class="text-[black] font-semibold">Choose a role</option>
+                                <option value="1" #adminOption>Admin</option>
+                                <option value="2" #userOption>User</option>
+                            </select>
+                        </div>
+
+
+                        <!-- ? -->
+                        
                         <!-- terms agreement -->
                         <div class="text-text mb-[15px] py-[8px]">
                             <input type="checkbox" formControlName="agreement" />
