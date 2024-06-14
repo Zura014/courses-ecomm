@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { User } from '../shared/user.model';
+import { Router } from '@angular/router';
 
 interface UserI {
   username?: string;
@@ -21,12 +22,18 @@ export class AuthService {
   private _profileUrl = 'http://localhost:3000/users/profile';
   private accessToken: string = '';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.accessToken = localStorage.getItem('accessToken') || '';
   }
 
   signUp(user: UserI): Observable<UserI> {
-    return this.http.post<UserI>(this._signUpUrL, user);
+    return this.http.post<UserI>(this._signUpUrL, user).pipe(
+      catchError(this.handleError),
+      tap(resData => {
+        this.handleAuth(resData);
+        console.log(resData);
+      })
+    );
   }
   
   signIn(user: UserI): Observable<{ accessToken: string }> {
@@ -64,15 +71,37 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
+
+    console.log(errorRes.message)
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }
     switch (errorRes.error.error.message) {
-      case 'EMAIL_EXISTS':
+      case 'Email already exists':
         errorMessage = 'This email exists already';
         break;
     }
-    return throwError(errorMessage);
+    return throwError(errorRes);
+  }
+  private handleAuth(resData: UserI) {
+    if(resData === null) {
+      return resData;
+    } else {
+      this.signIn({
+          email: resData.email,
+          password: resData.password
+        })
+        .subscribe(
+          {
+            next: (response) => {
+            localStorage.setItem('accessToken', response.accessToken);
+            this.router.navigateByUrl('/');
+          }, error: (err) => {
+            this.handleError(err);
+          }
+        }
+      )
+    }
   }
 }

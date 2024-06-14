@@ -43,15 +43,19 @@ export class LoginComponent implements OnInit {
       };
       this.authService
       .signIn(user)
-      .subscribe((response) => {
-        try {
-          localStorage.setItem('accessToken', response.accessToken);
+      .subscribe({
+        next: (resData) => {
+          localStorage.setItem('accessToken', resData.accessToken);
           this.router.navigateByUrl('/');
-        } catch (error) {
-          alert('Invalid Credidentials!');
-          this.loginForm.controls['password'].reset();
+        },
+        error: (err) => {
+          this.loginForm.controls['password'].reset();    
+        },
+        complete: () => {
+
         }
-      });
+      }
+    )
     }
   }
 }

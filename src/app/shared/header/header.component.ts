@@ -8,23 +8,14 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent {
   bm: boolean = false;
-  isLoggedIn!: boolean;
   authService: AuthService = inject(AuthService)
 
   ngOnInit(): void {
-    this.authService.isLoggedIn()
-    if(this.authService.isLoggedIn()) {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
-    }
-    console.log(this.isLoggedIn)
+    
   }
 
   logOut(): void {
     this.authService.logOut();
-    this.isLoggedIn = false;
-    console.log(this.isLoggedIn)
   }
 
 }

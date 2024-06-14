@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CounterComponent } from '../../components/counter/counter.component';
+import { CounterComponent } from '../../shared/counter/counter.component';
 
 @Component({
   selector: 'app-home',
