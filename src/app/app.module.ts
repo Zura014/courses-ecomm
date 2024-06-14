@@ -18,6 +18,7 @@ import { CounterComponent } from './shared/counter/counter.component';
 import { CourseTemplateComponent } from './shared/course-template/course-template.component';
 import { AlertComponent } from './shared/alert/alert.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     CourseTemplateComponent,
     AlertComponent,
     LoadingSpinnerComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,

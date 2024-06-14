@@ -1,4 +1,5 @@
 <app-banner title="login" path="login form"></app-banner>
+<ng-template appPlaceholder></ng-template>
 <section class="w-full py-[100px]">
     <div class="md:container mx-auto sm:px-3">
         <div class="flex justify-center w-full h-full">
@@ -14,6 +15,9 @@
                                 Sign Up for Free
                             </a>
                         </div>
+                    </div>
+                    <div *ngIf="isLoading" style="text-align: center;">
+                        <app-loading-spinner></app-loading-spinner>
                     </div>
                     <form method="post" (ngSubmit)="signIn()" [formGroup]="loginForm" class="text-left w-full">
                         <!-- Email -->

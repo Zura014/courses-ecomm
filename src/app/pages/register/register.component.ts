@@ -32,12 +32,10 @@ export class RegisterComponent implements OnDestroy {
 
   isSelected(): boolean {
     if(this.adminOption.nativeElement.selected || this.userOption.nativeElement.selected) {
-      console.log(this.roleSelected);
       return this.roleSelected = true;
-      } 
-      else {
-        console.log(this.roleSelected);
-        return this.roleSelected = false;
+    } 
+    else {
+      return this.roleSelected = false;
     }
   }
    
@@ -74,10 +72,8 @@ export class RegisterComponent implements OnDestroy {
   }
 
   signUp() {
-
-    this.isLoading = true;
-    
     if (this.registerForm.valid) {
+      this.isLoading = true;
       const user = {
         username: this.registerForm.value.username,
         email: this.registerForm.value.email,
@@ -96,7 +92,6 @@ export class RegisterComponent implements OnDestroy {
             console.log(err.error.message);
             this.showErrorAlert(err.error.message);
             this.isLoading = false;
-
           },
           complete: () => {
             this.router.navigateByUrl('/login');
@@ -111,8 +106,9 @@ export class RegisterComponent implements OnDestroy {
     hostViewContainerRef.clear();
     
     const componentRef = hostViewContainerRef.createComponent(AlertComponent);
-
+  
     componentRef.instance.message = message;
+
     this.closeSub = componentRef.instance.close.subscribe(() => {
       this.closeSub.unsubscribe();
       hostViewContainerRef.clear();

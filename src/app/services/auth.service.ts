@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, finalize, Observable, take, tap, throwError } from 'rxjs';
 import { User } from '../shared/user.model';
 import { Router } from '@angular/router';
 
@@ -28,10 +28,10 @@ export class AuthService {
 
   signUp(user: UserI): Observable<UserI> {
     return this.http.post<UserI>(this._signUpUrL, user).pipe(
-      catchError(this.handleError),
       tap(resData => {
         this.handleAuth(resData);
-      })
+      }),
+      catchError(this.handleError)
     );
   }
   
@@ -84,8 +84,9 @@ export class AuthService {
     return throwError(errorRes);
   }
   private handleAuth(resData: UserI) {
-    if(resData === null) {
-      return resData;
+    console.log(resData);
+    if(this.accessToken) {
+      return;
     } else {
       this.signIn({
           email: resData.email,
