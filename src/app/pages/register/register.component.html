@@ -1,5 +1,5 @@
 <app-banner title="register" path="sign up"></app-banner>
-<section class="w-full py-[100px]">
+<section class="w-full py-[100px]">    
     <div class="md:container mx-auto sm:px-3">
         <div class="flex justify-center w-full h-full">
             <div class="px-3 w-full md:w-1/2">
@@ -7,11 +7,15 @@
                     <div class="text-center mb-[30px]">
                         <h2 class="capitalize text-[32px] mb-[16px] font-primaryFont text-heading font-bold block">sign
                             up</h2>
-                        <div class="text-text">
-                            <span>Already have an account? </span>
-                            <a href="/login" class="text-[#000] hover:text-primary duration-300 underline">Sign in</a>
+                            <div class="text-text">
+                                <span>Already have an account? </span>
+                                <a href="/login" class="text-[#000] hover:text-primary duration-300 underline">Sign in</a>
+                            </div>
                         </div>
-                    </div>
+                        <div *ngIf="isLoading" style="text-align: center;">
+                            <app-loading-spinner></app-loading-spinner>
+                        </div>
+                        <ng-template appPlaceholder></ng-template>
                     <form method="post" (ngSubmit)="signUp()" [formGroup]="registerForm" class="text-left w-full">
                         <!-- Username -->
                         <div class="mb-[15px]">

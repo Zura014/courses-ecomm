@@ -31,7 +31,6 @@ export class AuthService {
       catchError(this.handleError),
       tap(resData => {
         this.handleAuth(resData);
-        console.log(resData);
       })
     );
   }

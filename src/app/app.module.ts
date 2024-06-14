@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { CounterComponent } from './shared/counter/counter.component';
 import { CourseTemplateComponent } from './shared/course-template/course-template.component';
+import { AlertComponent } from './shared/alert/alert.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { CourseTemplateComponent } from './shared/course-template/course-templat
     ForgotPasswordComponent,
     CounterComponent,
     CourseTemplateComponent,
+    AlertComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
