@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, finalize, Observable, take, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, finalize, Observable, take, tap, throwError } from 'rxjs';
 import { User } from '../shared/user.model';
 import { Router } from '@angular/router';
 
@@ -21,6 +21,9 @@ export class AuthService {
   private _forgotPassUrl = 'http://localhost:3000/auth/forgot-password';
   private _profileUrl = 'http://localhost:3000/users/profile';
   private accessToken: string = '';
+  private readonly LAST_ACTIVE_TIME_KEY = 'lastActiveTime';
+  private readonly AUTO_LOGOUT_TIME = 3600000;
+
 
   constructor(private http: HttpClient, private router: Router) {
     this.accessToken = localStorage.getItem('accessToken') || '';
@@ -29,7 +32,9 @@ export class AuthService {
   signUp(user: UserI): Observable<UserI> {
     return this.http.post<UserI>(this._signUpUrL, user).pipe(
       tap(resData => {
-        this.handleAuth(resData);
+        if(resData) {
+          this.handleAuth(user);
+        }
       }),
       catchError(this.handleError)
     );
@@ -46,7 +51,11 @@ export class AuthService {
       })
     );
   }
-  
+
+  autoLogOut() {
+    
+  }
+
   forgotPassword(user: any): Observable<any> {
     return this.http.post(this._forgotPassUrl, user);
   }
@@ -70,27 +79,24 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-
-    console.log(errorRes.message)
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }
-    switch (errorRes.error.error.message) {
-      case 'Email already exists':
-        errorMessage = 'This email exists already';
-        break;
-    }
+    // switch (errorRes.error.error.message) {
+    //   case 'The entered data is incorrect. Please review and make sure all fields are entered correctly.':
+    //     errorMessage = 'This email exists already';
+    //     break;
+    // }
     return throwError(errorRes);
   }
-  private handleAuth(resData: UserI) {
-    console.log(resData);
+  private handleAuth(user: UserI) {
     if(this.accessToken) {
       return;
     } else {
       this.signIn({
-          email: resData.email,
-          password: resData.password
+          email: user.email,
+          password: user.password
         })
         .subscribe(
           {
