@@ -1,4 +1,5 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, HostListener, inject, NgModule, OnInit } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,15 @@ import { Component, NgModule, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'courses-ecomm';
+  authService = inject(AuthService)
 
   constructor() { }
 
-  ngOnInit(): void { }
-
+  ngOnInit(): void {
+    this.authService.autoLogOut();
+  }
+  @HostListener('window:beforeunload')
+  onBeforeUnload(): void {
+    this.authService.setLastActiveTime();
+  }
 }

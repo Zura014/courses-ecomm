@@ -19,6 +19,7 @@ import { CourseTemplateComponent } from './shared/course-template/course-templat
 import { AlertComponent } from './shared/alert/alert.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
+import { NavigationStart, Router } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -51,4 +52,12 @@ import { PlaceholderDirective } from './shared/placeholder/placeholder.directive
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private router: Router, private authService: AuthService) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        this.authService.setLastActiveTime();
+      }
+    });
+  }
+ }

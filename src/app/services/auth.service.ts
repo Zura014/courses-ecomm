@@ -22,7 +22,7 @@ export class AuthService {
   private _profileUrl = 'http://localhost:3000/users/profile';
   private accessToken: string = '';
   private readonly LAST_ACTIVE_TIME_KEY = 'lastActiveTime';
-  private readonly AUTO_LOGOUT_TIME = 3600000;
+  private readonly AUTO_LOGOUT_TIME = Math.floor(3600 * 1000); //! time in seconds multiplied by 1000 miliseconds
 
 
   constructor(private http: HttpClient, private router: Router) {
@@ -52,8 +52,25 @@ export class AuthService {
     );
   }
 
+  setLastActiveTime(): void {
+    const currentTime = Date.now();
+    localStorage.setItem(this.LAST_ACTIVE_TIME_KEY, currentTime.toString());
+  }
+
   autoLogOut() {
-    
+    const lastActiveTime = localStorage.getItem(this.LAST_ACTIVE_TIME_KEY);
+    const token = localStorage.getItem('accessToken');
+
+    if (!lastActiveTime || !token) {
+      return;
+    }
+
+    const currentTime = Date.now();
+    const timeElapsed = currentTime - parseInt(lastActiveTime, 10);
+
+    if (timeElapsed > this.AUTO_LOGOUT_TIME) {
+      this.logOut();
+    }
   }
 
   forgotPassword(user: any): Observable<any> {
