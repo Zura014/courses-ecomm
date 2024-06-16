@@ -58,6 +58,10 @@ export class AuthService {
   }
 
   autoLogOut() {
+    if (this.isRememberMeEnabled()) {
+      return; // Skip auto-logout if "Remember Me" is enabled
+    }
+
     const lastActiveTime = localStorage.getItem(this.LAST_ACTIVE_TIME_KEY);
     const token = localStorage.getItem('accessToken');
 
@@ -92,9 +96,13 @@ export class AuthService {
 
   logOut(): void {
     localStorage.clear();
+    sessionStorage.clear();
     window.location.reload();
   }
 
+  isRememberMeEnabled(): boolean {
+    return localStorage.getItem('rememberMe') === 'true';
+  }
   private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {

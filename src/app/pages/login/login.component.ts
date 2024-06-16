@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         passwordValidator(),
         Validators.maxLength(32),
       ]),
-      rememberMe: new FormControl(false),
+      rememberMe: new FormControl(true || false, [Validators.required]),
     });
   }
 
@@ -54,12 +54,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password,
       };
+      const rememberMe: boolean = this.loginForm.value.rememberMe
       this.authService
       .signIn(user)
       .subscribe(
         {
           next: (resData) => {
             localStorage.setItem('accessToken', resData.accessToken);
+            localStorage.setItem('rememberMe', JSON.stringify(rememberMe));
             this.isLoading = false;
           },
           error: (err) => {
