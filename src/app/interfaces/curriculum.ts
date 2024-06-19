@@ -1,11 +1,11 @@
 export interface Curriculum {
-    id: number;
-    src:string;
-    chapters: [Chapter];
+  id: number;
+  src: string;
+  chapters: [Chapter];
 }
 
 export interface Chapter {
-    id: number;
-    title: string;
-    lessons: [];
+  id: number;
+  title: string;
+  lessons: [];
 }

@@ -1,6 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, finalize, Observable, take, tap, throwError } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  finalize,
+  Observable,
+  take,
+  tap,
+  throwError,
+} from 'rxjs';
 import { User } from '../shared/user.model';
 import { Router } from '@angular/router';
 
@@ -14,7 +22,6 @@ interface UserI {
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   private _signUpUrL = 'http://localhost:3000/auth/signup';
   private _signInUrL = 'http://localhost:3000/auth/signin';
@@ -24,31 +31,31 @@ export class AuthService {
   private readonly LAST_ACTIVE_TIME_KEY = 'lastActiveTime';
   private readonly AUTO_LOGOUT_TIME = Math.floor(3600 * 1000); //! time in seconds multiplied by 1000 miliseconds
 
-
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+  ) {
     this.accessToken = localStorage.getItem('accessToken') || '';
   }
 
   signUp(user: UserI): Observable<UserI> {
     return this.http.post<UserI>(this._signUpUrL, user).pipe(
-      tap(resData => {
-        if(resData) {
+      tap((resData) => {
+        if (resData) {
           this.handleAuth(user);
         }
       }),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   }
-  
+
   signIn(user: UserI): Observable<{ accessToken: string }> {
-    return this.http
-    .post<{ accessToken: string }>(this._signInUrL, user)
-    .pipe(
+    return this.http.post<{ accessToken: string }>(this._signInUrL, user).pipe(
       catchError(this.handleError),
-      tap(resData => {
+      tap((resData) => {
         localStorage.setItem('accessToken', resData.accessToken);
         this.accessToken = resData.accessToken;
-      })
+      }),
     );
   }
 
@@ -80,16 +87,15 @@ export class AuthService {
   forgotPassword(user: any): Observable<any> {
     return this.http.post(this._forgotPassUrl, user);
   }
-  
+
   isLoggedIn(): boolean {
     try {
-      if(localStorage.getItem('accessToken')){
+      if (localStorage.getItem('accessToken')) {
         return true;
       } else {
         return false;
       }
-    } 
-    catch (error){
+    } catch (error) {
       return false;
     }
   }
@@ -116,23 +122,21 @@ export class AuthService {
     return throwError(errorRes);
   }
   private handleAuth(user: UserI) {
-    if(this.accessToken) {
+    if (this.accessToken) {
       return;
     } else {
       this.signIn({
-          email: user.email,
-          password: user.password
-        })
-        .subscribe(
-          {
-            next: (response) => {
-            localStorage.setItem('accessToken', response.accessToken);
-            this.router.navigateByUrl('/');
-          }, error: (err) => {
-            this.handleError(err);
-          }
-        }
-      )
+        email: user.email,
+        password: user.password,
+      }).subscribe({
+        next: (response) => {
+          localStorage.setItem('accessToken', response.accessToken);
+          this.router.navigateByUrl('/');
+        },
+        error: (err) => {
+          this.handleError(err);
+        },
+      });
     }
   }
 }

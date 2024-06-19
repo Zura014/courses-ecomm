@@ -20,9 +20,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   loginForm: FormGroup;
   isLoggedIn!: boolean;
-  @ViewChild(PlaceholderDirective, {static: false}) alertHost!: PlaceholderDirective;
+  @ViewChild(PlaceholderDirective, { static: false })
+  alertHost!: PlaceholderDirective;
   private closeSub!: Subscription;
-
 
   constructor() {
     this.loginForm = new FormGroup({
@@ -40,9 +40,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.isLoggedIn = this.authService.isLoggedIn();
   }
-  
+
   ngOnDestroy(): void {
-    if(this.closeSub) {
+    if (this.closeSub) {
       this.closeSub.unsubscribe();
     }
   }
@@ -54,34 +54,30 @@ export class LoginComponent implements OnInit, OnDestroy {
         email: this.loginForm.value.email,
         password: this.loginForm.value.password,
       };
-      const rememberMe: boolean = this.loginForm.value.rememberMe
-      this.authService
-      .signIn(user)
-      .subscribe(
-        {
-          next: (resData) => {
-            localStorage.setItem('accessToken', resData.accessToken);
-            localStorage.setItem('rememberMe', JSON.stringify(rememberMe));
-            this.isLoading = false;
-          },
-          error: (err) => {
-            this.loginForm.controls['password'].reset();
-            this.showErrorAlert(err.error.message);
-            this.isLoading = false;
-          },
-          complete: () => {
-            this.router.navigateByUrl('/');
-          }
-        }
-      )
+      const rememberMe: boolean = this.loginForm.value.rememberMe;
+      this.authService.signIn(user).subscribe({
+        next: (resData) => {
+          localStorage.setItem('accessToken', resData.accessToken);
+          localStorage.setItem('rememberMe', JSON.stringify(rememberMe));
+          this.isLoading = false;
+        },
+        error: (err) => {
+          this.loginForm.controls['password'].reset();
+          this.showErrorAlert(err.error.message);
+          this.isLoading = false;
+        },
+        complete: () => {
+          this.router.navigateByUrl('/');
+        },
+      });
     }
   }
   private showErrorAlert(message: string): void {
     const hostViewContainerRef = this.alertHost.viewContainerRef;
     hostViewContainerRef.clear();
-    
+
     const componentRef = hostViewContainerRef.createComponent(AlertComponent);
-  
+
     componentRef.instance.message = message;
 
     this.closeSub = componentRef.instance.close.subscribe(() => {

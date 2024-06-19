@@ -1,313 +1,515 @@
 <app-banner title="register" path="sign up"></app-banner>
 <ng-template appPlaceholder></ng-template>
-<section class="w-full py-[100px]">    
-    <div class="md:container mx-auto sm:px-3">
-        <div class="flex justify-center w-full h-full">
-            <div class="px-3 w-full md:w-1/2">
-                <div class="px-[20px] py-[40px] md:p-[40px] border rounded-md border-borderC shadow-lg">
-                    <div class="text-center mb-[30px]">
-                        <h2 class="capitalize text-[32px] mb-[16px] font-primaryFont text-heading font-bold block">sign
-                            up</h2>
-                            <div class="text-text">
-                                <span>Already have an account? </span>
-                                <a href="/login" class="text-[#000] hover:text-primary duration-300 underline">Sign in</a>
-                            </div>
-                        </div>
-                        <div *ngIf="isLoading" style="text-align: center;">
-                            <app-loading-spinner></app-loading-spinner>
-                        </div>
-                    <form method="post" (ngSubmit)="signUp()" [formGroup]="registerForm" class="text-left w-full">
-                        <!-- Username -->
-                        <div class="mb-[15px]">
-                            <label
-                                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold "
-                                for="">
-                                username
-                                <span>*</span>
-                            </label>
-                            <input type="text" formControlName="username" placeholder="Username"
-                                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" />
-                        </div>
-
-                        <!--? Username validation -->
-
-                        <div class="invalid-data mb-[15px] text-text text-sm" *ngIf="
-                            registerForm.controls['username'].invalid && 
-                            registerForm.controls['username'].touched &&
-                            registerForm.controls['username'].errors
-                            ">
-                            <!-- registerForm.controls['username']?.usernameTaken -->
-                            <div class="flex items-center"
-                                *ngIf="registerForm.controls['username'].errors['required']">
-                                <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                                    viewBox="0 0 32 32" width="15" xml:space="preserve"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g>
-                                        <g id="Error_1_">
-                                            <g id="Error">
-                                                <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
-                                                    id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                First Name is required
-                            </div>
-                            <div class="flex items-center"
-                                *ngIf="registerForm.controls['username'].errors['minlength'] || registerForm.controls['username'].errors['maxlength']">
-                                <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                                    viewBox="0 0 32 32" width="15" xml:space="preserve"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g>
-                                        <g id="Error_1_">
-                                            <g id="Error">
-                                                <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
-                                                    id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                First Name is invalid
-                            </div>
-                        </div>
-
-                        <!-- ? -->
-
-                        <!-- Email -->
-                        <div class="mb-[15px]">
-                            <label
-                                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold "
-                                for="">
-                                Email Address
-                                <span>*</span>
-                            </label>
-                            <input type="email" formControlName="email" name="email" placeholder="Email"
-                                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" />
-                        </div>
-
-
-                        <!--? Email validation -->
-
-
-                        <div class="invalid-data mb-[15px] text-text text-sm" *ngIf="
-                            registerForm.controls['email'].invalid &&
-                            registerForm.controls['email'].touched &&
-                            registerForm.controls['email'].errors
-                        ">
-
-                            <div class="flex items-center" *ngIf="registerForm.controls['email'].errors['required']">
-                                <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                                    viewBox="0 0 32 32" width="15" xml:space="preserve"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g>
-                                        <g id="Error_1_">
-                                            <g id="Error">
-                                                <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
-                                                    id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                Email is required
-                            </div>
-                            <div class="flex items-center" *ngIf="registerForm.controls['email'].errors['email']">
-                                <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                                    viewBox="0 0 32 32" width="15" xml:space="preserve"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g>
-                                        <g id="Error_1_">
-                                            <g id="Error">
-                                                <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
-                                                    id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                Enter a valid email address
-                            </div>
-                        </div>
-
-
-                        <!-- ? -->
-
-
-
-                        <!-- Password -->
-                        <div class="mb-[15px]">
-                            <label
-                                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold "
-                                for="">
-                                Password
-                                <span>*</span>
-                            </label>
-                            <input 
-                                type="password" 
-                                formControlName="password"
-                                name="password"
-                                placeholder="Password"
-                                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" />
-                        </div>
-
-                        <!-- ? Password validator -->
-
-                        <div class="invalid-data mb-[15px] text-text text-sm" *ngIf="
-                        registerForm.controls['password'].invalid &&
-                        registerForm.controls['password'].touched &&
-                        registerForm.controls['password'].errors
-                     ">
-    
-                    <div class="flex items-center" *ngIf="registerForm.controls['password'].errors['required']">
-                        <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                            viewBox="0 0 32 32" width="15" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g>
-                                <g id="Error_1_">
-                                    <g id="Error">
-                                        <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                        <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z" id="Exclamatory_x5F_Sign"
-                                            style="fill:#E6E6E6;" />
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                        Password is required
-                    </div>
-                    <div 
-                        class="flex items-center" 
-                        *ngIf="
-                        (
-                            registerForm.controls['password'].errors['uppercase'] ||
-                            registerForm.controls['password'].errors['numeric'] ||
-                            registerForm.controls['password'].errors['specialCharacter'] || 
-                            registerForm.controls['password'].errors['minlength']) || 
-                            registerForm.controls['password'].errors['maxlength']  
-                        "
-                        >
-                        <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                            viewBox="0 0 32 32" width="15" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <g>
-                                <g id="Error_1_">
-                                    <g id="Error">
-                                        <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                        <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z" id="Exclamatory_x5F_Sign"
-                                            style="fill:#E6E6E6;" />
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                        Your password must contain at least 8 characters <br> (1 upper case, numeric, and special character. For example: Pass!234)
-                    </div>
-                </div>
-
-
-                        <!-- ? -->
-
-
-                        <!-- Re-Enter Password -->
-                        <div class="mb-[15px]">
-                            <label
-                                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold "
-                                for="">
-                                Re-Enter Password
-                                <span>*</span>
-                            </label>
-                            <input formControlName="repeatPassword" type="password" placeholder="Re-Enter Password"
-                                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" />
-                        </div>
-
-
-                        <!-- ? Repeat Password Validator -->
-                        
-                        <div class="invalid-data mb-[15px] text-text text-sm">
-
-                            <div class="flex items-center" *ngIf="registerForm.errors?.['passwordMatch'] && registerForm.get('repeatPassword')?.touched">
-                                <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                                    viewBox="0 0 32 32" width="15" xml:space="preserve"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g>
-                                        <g id="Error_1_">
-                                            <g id="Error">
-                                                <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
-                                                    id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                Passwords do not match!
-                            </div>
-                        </div>
-
-                        
-                        <!-- ? -->
-                        
-                        <div class="py-3 relative">
-                            <label
-                                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold "
-                                for="">
-                                Please select a role
-                                <span>*</span>
-                            </label>
-                            <div class="z-10 top-1/2 absolute text-text pt-[2px] pl-[20px] left-2"
-                                [ngClass]="{'opacity-0 pointer-events-none': roleSelected}"    
-                            >
-                                <p class="text-text ">Roles:</p>
-                            </div>
-                            <select (change)="isSelected()" name="role" formControlName="role" 
-                                class="text-[black] py-[6px] w-full pl-[20px] placeholder:text-xl outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary" 
-                                [ngClass]="{'text-[black]': !roleSelected}"
-                                >
-                                <option value="" selected hidden disabled class="text-[black] font-semibold">Choose a role</option>
-                                <option value="1" #adminOption>Admin</option>
-                                <option value="2" #userOption>User</option>
-                            </select>
-                        </div>
-
-
-                        <!-- ? -->
-                        
-                        <!-- terms agreement -->
-                        <div class="text-text mb-[15px] py-[8px]">
-                            <input type="checkbox" formControlName="agreement" />
-                            <span>
-                                Accept the Terms and Privacy Policy
-                            </span>
-                            <!-- ? Checkbox Validation -->
-                            <div class="flex items-center mt-3" *ngIf="registerForm.get('agreement')?.invalid && registerForm.get('agreement')?.touched">
-                                <svg height="15" class="mr-2.5" style="overflow:visible;enable-background:new 0 0 32 32"
-                                    viewBox="0 0 32 32" width="15" xml:space="preserve"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                    <g>
-                                        <g id="Error_1_">
-                                            <g id="Error">
-                                                <circle cx="16" cy="16" id="BG" r="16" style="fill:#D72828;" />
-                                                <path d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
-                                                    id="Exclamatory_x5F_Sign" style="fill:#E6E6E6;" />
-                                            </g>
-                                        </g>
-                                    </g>
-                                </svg>
-                                <small class="text-text">You must agree to the terms and conditions.</small>
-                            </div>
-                            <!-- ? -->
-                        </div>
-
-                        <!-- submit button -->
-                        <div class="mb-[15px]">
-                            <button type="submit"
-                                class="bg-secondary text-white font-semibold duration-400 ease-in-out rounded-md w-full h-full transition-all hover:bg-primary"
-                                style="padding: 0.6180469716em 1.41575em;">
-                                Register
-                            </button>
-                        </div>
-                    </form>
-                </div>
+<section class="w-full py-[100px]">
+  <div class="md:container mx-auto sm:px-3">
+    <div class="flex justify-center w-full h-full">
+      <div class="px-3 w-full md:w-1/2">
+        <div
+          class="px-[20px] py-[40px] md:p-[40px] border rounded-md border-borderC shadow-lg"
+        >
+          <div class="text-center mb-[30px]">
+            <h2
+              class="capitalize text-[32px] mb-[16px] font-primaryFont text-heading font-bold block"
+            >
+              sign up
+            </h2>
+            <div class="text-text">
+              <span>Already have an account? </span>
+              <a
+                href="/login"
+                class="text-[#000] hover:text-primary duration-300 underline"
+                >Sign in</a
+              >
             </div>
+          </div>
+          <div *ngIf="isLoading" style="text-align: center">
+            <app-loading-spinner></app-loading-spinner>
+          </div>
+          <form
+            method="post"
+            (ngSubmit)="signUp()"
+            [formGroup]="registerForm"
+            class="text-left w-full"
+          >
+            <!-- Username -->
+            <div class="mb-[15px]">
+              <label
+                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold"
+                for=""
+              >
+                username
+                <span>*</span>
+              </label>
+              <input
+                type="text"
+                formControlName="username"
+                placeholder="Username"
+                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary"
+              />
+            </div>
+
+            <!--? Username validation -->
+
+            <div
+              class="invalid-data mb-[15px] text-text text-sm"
+              *ngIf="
+                registerForm.controls['username'].invalid &&
+                registerForm.controls['username'].touched &&
+                registerForm.controls['username'].errors
+              "
+            >
+              <!-- registerForm.controls['username']?.usernameTaken -->
+              <div
+                class="flex items-center"
+                *ngIf="registerForm.controls['username'].errors['required']"
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                First Name is required
+              </div>
+              <div
+                class="flex items-center"
+                *ngIf="
+                  registerForm.controls['username'].errors['minlength'] ||
+                  registerForm.controls['username'].errors['maxlength']
+                "
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                First Name is invalid
+              </div>
+            </div>
+
+            <!-- ? -->
+
+            <!-- Email -->
+            <div class="mb-[15px]">
+              <label
+                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold"
+                for=""
+              >
+                Email Address
+                <span>*</span>
+              </label>
+              <input
+                type="email"
+                formControlName="email"
+                name="email"
+                placeholder="Email"
+                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary"
+              />
+            </div>
+
+            <!--? Email validation -->
+
+            <div
+              class="invalid-data mb-[15px] text-text text-sm"
+              *ngIf="
+                registerForm.controls['email'].invalid &&
+                registerForm.controls['email'].touched &&
+                registerForm.controls['email'].errors
+              "
+            >
+              <div
+                class="flex items-center"
+                *ngIf="registerForm.controls['email'].errors['required']"
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                Email is required
+              </div>
+              <div
+                class="flex items-center"
+                *ngIf="registerForm.controls['email'].errors['email']"
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                Enter a valid email address
+              </div>
+            </div>
+
+            <!-- ? -->
+
+            <!-- Password -->
+            <div class="mb-[15px]">
+              <label
+                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold"
+                for=""
+              >
+                Password
+                <span>*</span>
+              </label>
+              <input
+                type="password"
+                formControlName="password"
+                name="password"
+                placeholder="Password"
+                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary"
+              />
+            </div>
+
+            <!-- ? Password validator -->
+
+            <div
+              class="invalid-data mb-[15px] text-text text-sm"
+              *ngIf="
+                registerForm.controls['password'].invalid &&
+                registerForm.controls['password'].touched &&
+                registerForm.controls['password'].errors
+              "
+            >
+              <div
+                class="flex items-center"
+                *ngIf="registerForm.controls['password'].errors['required']"
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                Password is required
+              </div>
+              <div
+                class="flex items-center"
+                *ngIf="
+                  registerForm.controls['password'].errors['uppercase'] ||
+                  registerForm.controls['password'].errors['numeric'] ||
+                  registerForm.controls['password'].errors[
+                    'specialCharacter'
+                  ] ||
+                  registerForm.controls['password'].errors['minlength'] ||
+                  registerForm.controls['password'].errors['maxlength']
+                "
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                Your password must contain at least 8 characters <br />
+                (1 upper case, numeric, and special character. For example:
+                Pass!234)
+              </div>
+            </div>
+
+            <!-- ? -->
+
+            <!-- Re-Enter Password -->
+            <div class="mb-[15px]">
+              <label
+                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold"
+                for=""
+              >
+                Re-Enter Password
+                <span>*</span>
+              </label>
+              <input
+                formControlName="repeatPassword"
+                type="password"
+                placeholder="Re-Enter Password"
+                class="py-[6px] w-full pl-[20px] outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary"
+              />
+            </div>
+
+            <!-- ? Repeat Password Validator -->
+
+            <div class="invalid-data mb-[15px] text-text text-sm">
+              <div
+                class="flex items-center"
+                *ngIf="
+                  registerForm.errors?.['passwordMatch'] &&
+                  registerForm.get('repeatPassword')?.touched
+                "
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                Passwords do not match!
+              </div>
+            </div>
+
+            <!-- ? -->
+
+            <div class="py-3 relative">
+              <label
+                class="text-[13px] tracking-[1px] font-secondaryFont mb-[6px] text-text uppercase block font-semibold"
+                for=""
+              >
+                Please select a role
+                <span>*</span>
+              </label>
+              <div
+                class="z-10 top-1/2 absolute text-text pt-[2px] pl-[20px] left-2"
+                [ngClass]="{ 'opacity-0 pointer-events-none': roleSelected }"
+              >
+                <p class="text-text">Roles:</p>
+              </div>
+              <select
+                (change)="isSelected()"
+                name="role"
+                formControlName="role"
+                class="text-[black] py-[6px] w-full pl-[20px] placeholder:text-xl outline-none block ease-in-out rounded-md pr-3 border-2 border-[#F5F5F5] bg-[#F5F5F5] h-[55px] focus:bg-white duration-300 focus:border-primary"
+                [ngClass]="{ 'text-[black]': !roleSelected }"
+              >
+                <option
+                  value=""
+                  selected
+                  hidden
+                  disabled
+                  class="text-[black] font-semibold"
+                >
+                  Choose a role
+                </option>
+                <option value="1" #adminOption>Admin</option>
+                <option value="2" #userOption>User</option>
+              </select>
+            </div>
+
+            <!-- ? -->
+
+            <!-- terms agreement -->
+            <div class="text-text mb-[15px] py-[8px]">
+              <input type="checkbox" formControlName="agreement" />
+              <span> Accept the Terms and Privacy Policy </span>
+              <!-- ? Checkbox Validation -->
+              <div
+                class="flex items-center mt-3"
+                *ngIf="
+                  registerForm.get('agreement')?.invalid &&
+                  registerForm.get('agreement')?.touched
+                "
+              >
+                <svg
+                  height="15"
+                  class="mr-2.5"
+                  style="overflow: visible; enable-background: new 0 0 32 32"
+                  viewBox="0 0 32 32"
+                  width="15"
+                  xml:space="preserve"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                >
+                  <g>
+                    <g id="Error_1_">
+                      <g id="Error">
+                        <circle
+                          cx="16"
+                          cy="16"
+                          id="BG"
+                          r="16"
+                          style="fill: #d72828"
+                        />
+                        <path
+                          d="M14.5,25h3v-3h-3V25z M14.5,6v13h3V6H14.5z"
+                          id="Exclamatory_x5F_Sign"
+                          style="fill: #e6e6e6"
+                        />
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+                <small class="text-text"
+                  >You must agree to the terms and conditions.</small
+                >
+              </div>
+              <!-- ? -->
+            </div>
+
+            <!-- submit button -->
+            <div class="mb-[15px]">
+              <button
+                type="submit"
+                class="bg-secondary text-white font-semibold duration-400 ease-in-out rounded-md w-full h-full transition-all hover:bg-primary"
+                style="padding: 0.6180469716em 1.41575em"
+              >
+                Register
+              </button>
+            </div>
+          </form>
         </div>
+      </div>
     </div>
+  </div>
 </section>

@@ -7,7 +7,7 @@ import { passwordValidator } from '../../validators/password.validator';
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrl: './forgot-password.component.css'
+  styleUrl: './forgot-password.component.css',
 })
 export class ForgotPasswordComponent {
   banner: string = '../../../assets/page-title.jpg';
@@ -16,9 +16,7 @@ export class ForgotPasswordComponent {
 
   forgotPasswordForm: FormGroup;
 
-
   constructor() {
-
     this.forgotPasswordForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
@@ -26,22 +24,19 @@ export class ForgotPasswordComponent {
         Validators.minLength(8),
         passwordValidator(),
         Validators.maxLength(32),
-      ])});
+      ]),
+    });
   }
 
   forgotPassword() {
-    if(this.forgotPasswordForm.valid){
+    if (this.forgotPasswordForm.valid) {
       const user = {
         email: this.forgotPasswordForm.value.email,
         new_password: this.forgotPasswordForm.value.password,
-      }
-      this.authService
-      .forgotPassword(user)
-      .subscribe(() => {
-        this.router.navigateByUrl('/login')
+      };
+      this.authService.forgotPassword(user).subscribe(() => {
+        this.router.navigateByUrl('/login');
       });
     }
   }
-
-
 }

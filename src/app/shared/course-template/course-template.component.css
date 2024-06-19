@@ -1,31 +1,31 @@
 .hv-content {
-    transform: scale(1);
-    transition: all .4s ease-in-out;
+  transform: scale(1);
+  transition: all 0.4s ease-in-out;
 }
 
 .hv-box:hover .hv-content {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .price-tag {
-    left: -40%;
-    transition: all .4s ease-in-out;
+  left: -40%;
+  transition: all 0.4s ease-in-out;
 }
 
 .hv-box:hover .price-tag {
-    left: 0;
+  left: 0;
 }
 
 .dot-after::after {
-    position: absolute;
-    content: "";
-    right: -15px;
-    top: 50%;
-    transform: translateY(-50%);
-    bottom: 0px;
-    margin: auto;
-    width: 6px;
-    height: 6px;
-    background: #ddd;
-    border-radius: 100%;
+  position: absolute;
+  content: "";
+  right: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: 0px;
+  margin: auto;
+  width: 6px;
+  height: 6px;
+  background: #ddd;
+  border-radius: 100%;
 }

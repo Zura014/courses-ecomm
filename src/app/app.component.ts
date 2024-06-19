@@ -1,16 +1,22 @@
-import { Component, HostListener, inject, NgModule, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  inject,
+  NgModule,
+  OnInit,
+} from '@angular/core';
 import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent implements OnInit {
   title = 'courses-ecomm';
-  authService = inject(AuthService)
+  authService = inject(AuthService);
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.authService.autoLogOut();

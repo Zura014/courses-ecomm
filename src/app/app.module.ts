@@ -10,7 +10,11 @@ import { CoursesComponent } from './pages/courses/courses.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BannerComponent } from './shared/banner/banner.component';
-import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withFetch,
+} from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
@@ -36,28 +40,31 @@ import { NavigationStart, Router } from '@angular/router';
     CourseTemplateComponent,
     AlertComponent,
     LoadingSpinnerComponent,
-    PlaceholderDirective
+    PlaceholderDirective,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule,   
+    HttpClientModule,
   ],
   providers: [
     provideHttpClient(withFetch()),
     importProvidersFrom(HttpClientModule),
-    AuthService
+    AuthService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(private router: Router, private authService: AuthService) {
-    this.router.events.subscribe(event => {
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+  ) {
+    this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.authService.setLastActiveTime();
       }
     });
   }
- }
+}
