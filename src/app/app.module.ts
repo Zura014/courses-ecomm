@@ -14,6 +14,7 @@ import {
   HttpClientModule,
   provideHttpClient,
   withFetch,
+  withInterceptorsFromDi,
 } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -24,6 +25,7 @@ import { AlertComponent } from './shared/alert/alert.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 import { NavigationStart, Router } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -47,11 +49,12 @@ import { NavigationStart, Router } from '@angular/router';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    SharedModule,
     HttpClientModule,
   ],
   providers: [
     provideHttpClient(withFetch()),
-    importProvidersFrom(HttpClientModule),
+    provideHttpClient(withInterceptorsFromDi()),
     AuthService,
   ],
   bootstrap: [AppComponent],

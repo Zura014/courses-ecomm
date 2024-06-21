@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         passwordValidator(),
         Validators.maxLength(32),
       ]),
-      rememberMe: new FormControl(true || false, [Validators.required]),
+      rememberMe: new FormControl(false, [Validators.required]),
     });
   }
 

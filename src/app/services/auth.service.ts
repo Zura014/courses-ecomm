@@ -104,6 +104,7 @@ export class AuthService {
     localStorage.clear();
     sessionStorage.clear();
     window.location.reload();
+    localStorage.removeItem('rememberMe');
   }
 
   isRememberMeEnabled(): boolean {
