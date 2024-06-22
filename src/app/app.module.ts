@@ -16,7 +16,7 @@ import { AuthService } from './pages/auth/auth.service';
 import { NavigationStart, Router } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './pages/auth/auth.module';
-import { CourseTemplateComponent } from './shared/course-template/course-template.component';
+import { CourseTemplateComponent } from './pages/courses/course-template/course-template.component';
 
 @NgModule({
   declarations: [
