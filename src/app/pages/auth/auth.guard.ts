@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
-  const protectedRoutes: string[] = ['/register', '/login'];
+  const protectedRoutes: string[] = ['/register', '/login', '/forgot-password'];
   return protectedRoutes.includes(state.url) &&
     !localStorage.getItem('accessToken')
     ? true

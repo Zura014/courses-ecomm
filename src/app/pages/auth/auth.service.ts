@@ -9,7 +9,7 @@ import {
   tap,
   throwError,
 } from 'rxjs';
-import { User } from '../shared/user.model';
+import { User } from '../../shared/user.model';
 import { Router } from '@angular/router';
 
 interface UserI {

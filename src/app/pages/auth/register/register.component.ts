@@ -6,13 +6,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { passwordValidator } from '../../validators/password.validator';
-import { matchPassword } from '../../validators/passwordMatch.validator';
-import { PlaceholderDirective } from '../../shared/placeholder/placeholder.directive';
+import { passwordValidator } from '../../../validators/password.validator';
+import { matchPassword } from '../../../validators/passwordMatch.validator';
+import { PlaceholderDirective } from '../../../shared/placeholder/placeholder.directive';
 import { Subscription } from 'rxjs';
-import { AlertComponent } from '../../shared/alert/alert.component';
+import { AlertComponent } from '../../../shared/alert/alert.component';
 
 @Component({
   selector: 'app-register',
