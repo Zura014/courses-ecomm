@@ -5,7 +5,5 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-course-template',
   templateUrl: './course-template.component.html',
   styleUrl: './course-template.component.css',
-  standalone: true,
-  imports: [RouterOutlet]
 })
 export class CourseTemplateComponent {}

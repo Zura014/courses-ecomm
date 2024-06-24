@@ -16,7 +16,8 @@ import { AuthService } from './pages/auth/auth.service';
 import { NavigationStart, Router } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './pages/auth/auth.module';
-import { CourseTemplateComponent } from './pages/courses/course-template/course-template.component';
+import { CoursesModule } from './pages/courses/courses.module';
+
 
 @NgModule({
   declarations: [
@@ -29,9 +30,8 @@ import { CourseTemplateComponent } from './pages/courses/course-template/course-
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    HttpClientModule,
     AuthModule,
-    CourseTemplateComponent
+    CoursesModule
   ],
   providers: [
     provideHttpClient(withFetch()),

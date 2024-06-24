@@ -21,14 +21,15 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
         component: RegisterComponent,
         canActivate: [authGuard],
       },
-      { 
-        path: 'login', 
-        component: LoginComponent, 
-        canActivate: [authGuard] },
+      {
+        path: 'login',
+        component: LoginComponent,
+        canActivate: [authGuard],
+      },
       {
         path: 'forgot-password',
         component: ForgotPasswordComponent,
-        canActivate: [authGuard]
+        canActivate: [authGuard],
       },
     ]),
   ],

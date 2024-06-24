@@ -29,7 +29,7 @@ export class AuthService {
   private _profileUrl = 'http://localhost:3000/users/profile';
   private accessToken: string = '';
   private readonly LAST_ACTIVE_TIME_KEY = 'lastActiveTime';
-  private readonly AUTO_LOGOUT_TIME = Math.floor(3600 * 1000); //! time in seconds multiplied by 1000 miliseconds
+  private readonly AUTO_LOGOUT_TIME = Math.floor(10 * 1000); //! time in seconds multiplied by 1000 miliseconds
 
   constructor(
     private http: HttpClient,
