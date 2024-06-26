@@ -1,15 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  BehaviorSubject,
   catchError,
-  finalize,
   Observable,
-  take,
   tap,
   throwError,
 } from 'rxjs';
-import { User } from '../../shared/user.model';
 import { Router } from '@angular/router';
 
 interface UserI {
@@ -26,7 +22,6 @@ export class AuthService {
   private _signUpUrL = 'http://localhost:3000/auth/signup';
   private _signInUrL = 'http://localhost:3000/auth/signin';
   private _forgotPassUrl = 'http://localhost:3000/auth/forgot-password';
-  private _profileUrl = 'http://localhost:3000/users/profile';
   private accessToken: string = '';
   private readonly LAST_ACTIVE_TIME_KEY = 'lastActiveTime';
   private readonly AUTO_LOGOUT_TIME = Math.floor(10 * 1000); //! time in seconds multiplied by 1000 miliseconds
@@ -120,7 +115,9 @@ export class AuthService {
     //     errorMessage = 'This email exists already';
     //     break;
     // }
-    return throwError(errorRes);
+    const error = new Error(errorRes.error);
+    return throwError(() => error);
+    //? return throwError(errorRes);
   }
   private handleAuth(user: UserI) {
     if (this.accessToken) {
