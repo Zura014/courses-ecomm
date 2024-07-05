@@ -2,7 +2,6 @@ import {
   Component,
   HostListener,
   inject,
-  NgModule,
   OnInit,
 } from '@angular/core';
 import { AuthService } from './pages/auth/auth.service';

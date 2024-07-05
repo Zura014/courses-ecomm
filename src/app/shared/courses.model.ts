@@ -4,5 +4,4 @@ export interface CoursesModel{
     title: string;
     description: string;
     price: number;
-    
 }
