@@ -23,6 +23,13 @@ const routes: Routes = [
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
     title: 'Edumel - Authorization Page',
   },
+  // {
+  //   path: 'profile',
+  //   loadComponent: () =>
+  //     import('./pages/profile/profile.component').then(
+  //       (m) => m.ProfileComponent,
+  //     ),
+  // },
 ];
 @NgModule({ imports: [RouterModule.forRoot(routes)], exports: [RouterModule] })
 export class AppRoutingModule {}

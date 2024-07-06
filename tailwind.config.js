@@ -9,6 +9,7 @@ module.exports = {
       text: "#77838F",
       white: "#fff",
       borderC: "#ddd",
+      buttonBG: "rgba(0, 113, 220, 0.1)",
     },
     screens: {
       xs: "420px",
@@ -25,5 +26,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 };

@@ -26,7 +26,6 @@ import { CommonModule } from "@angular/common";
         LoadingSpinnerComponent,
         HeaderComponent,
         PlaceholderDirective,
-        CommonModule
     ],
     providers: [],
     bootstrap: []
