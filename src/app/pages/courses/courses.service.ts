@@ -42,7 +42,7 @@ export class CoursesService {
   }
 
   getCourses(page: number) {
-    return this.http.get(`http://localhost:3000/courses?page=${page}`, {
+    return this.http.get<any>(`http://localhost:3000/courses?page=${page}`, {
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
     });
   }

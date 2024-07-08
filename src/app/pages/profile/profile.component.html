@@ -1,1 +1,90 @@
-<h1></h1>Profile page
+<app-banner title="Profile" path="profile"></app-banner>
+
+<section class="font-inter h-full w-full py-2.5 px-1 xs:py-5 xs:px-7 sm:py-10 sm:px-14 max-w-screen-xxl mx-auto">
+  <div class="bg-heading h-full w-full px-[18px] py-6 rounded-lg">
+    <div class="flex md:flex-row gap-y-12 md:gap-y-0 flex-col justify-start md:gap-x-[58px] items-center">
+      <div
+        class="divHV ml-[21px] relative max-w-[175px] max-h-[175px] size-[175px] bg-secondary rounded-full flex justify-center items-center"
+      >
+        <div class="overlayHV"></div>
+        <img
+          [src]="imageUrl"
+          [alt]="username"
+          loading="eager"
+          class="cursor-pointer max-w-[164px] max-h-[164px]"
+        />
+        <button
+          class="absolute btnHV duration-300 bg-[#dddcfb] px-2 py-2 rounded-md cursor-pointer outline-none opacity-0 pointer-events-none"
+        >
+          <input
+            type="file"
+            accept="image/*"
+            name="file"
+            id="file"
+            (change)="imgChanged($event)"
+            class="outline-none cursor-pointer"
+            hidden
+          />
+          <label
+            for="file"
+            class="font-bold text-secondary text-opacity-75 hover:text-opacity-100 cursor-pointer hover:text-secondary outline-none"
+            >Change Photo</label
+          >
+        </button>
+      </div>
+      <div class="text-white text-center md:text-start">
+        <h1 class="text-4xl font-bold md:mb-0 mb-4">Hey, {{ username }}!</h1>
+        <h2 class="md:inline-block text-2xl font-bold">Good To see you again</h2>
+        <img
+          src="../../../assets/heart.svg"
+          class="md:inline-block max-w-[35px] mt-4 mx-auto md:mt-0"
+          alt=""
+        />
+      </div>
+    </div>
+    <div class="flex justify-start gap-[38px]">
+      <div class="inline-block mt-6 w-full md:w-[216px]">
+        <ul
+          class="flex gap-y-2 flex-col w-full h-full justify-center items-center"
+        >
+          <li
+            class="h-[50px] text-center text-secondary font-bold text-xl py-[12px] w-full bg-white"
+          >
+            <a href="/profile" class="block">Profile</a>
+          </li>
+          <li
+            class="h-[50px] text-center text-white font-bold text-xl py-[12px] w-full bg-secondary"
+          >
+            <a href="/my-courses" class="block">My Courses</a>
+          </li>
+          <li
+            class="h-[50px] text-center text-white font-bold text-xl py-[12px] w-full bg-secondary"
+          >
+            <a href="/edit-profile" class="block">Edit Profile</a>
+          </li>
+          <li
+            class="h-[50px] text-center text-primary font-bold text-xl py-[12px] w-full bg-[#dddcfb]"
+          >
+            <a href="/delete-account" class="block">Delete Account</a>
+          </li>
+        </ul>
+      </div>
+      <div class="md:inline-block max-w-2xl hidden">
+        <ul class="text-white text-2xl font-semibold flex flex-col gap-y-8">
+          <li>
+            <h3 class="text-xl inline uppercase">Username:</h3>
+            {{ username }}
+          </li>
+          <li>
+            <h3 class="text-xl uppercase inline">Email:</h3>
+            {{ email }}
+          </li>
+          <li class="text-lg line-clamp-4">
+            <h3 class="text-base uppercase">Description:</h3>
+            {{ description == null ? "Description not Found." : description }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

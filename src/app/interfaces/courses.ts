@@ -18,5 +18,12 @@ export interface Courses {
   description: string;
   price: number;
   imageUrl: string;
-  userId: number;
+  userId?: number;
+  user?: {
+    id: number;
+    username: string;
+    email: string;
+    description: string;
+    imageUrl: string;
+  }
 }

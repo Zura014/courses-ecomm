@@ -23,6 +23,7 @@ module.exports = {
       fontFamily: {
         primaryFont: ["GilRoy", "sans-serif"],
         secondaryFont: ["Jost", "sans-serif"],
+        inter: ["Inter", "sans-serif"]
       },
     },
   },

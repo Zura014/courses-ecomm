@@ -8,7 +8,7 @@
         <img [src]="course.imageUrl" class="hv-content w-full align-middle" />
         <div
           class="absolute bottom-0 px-[15px] py-[6px] lg:py-[12px] bg-primary text-white font-bold font-primaryFont text-lg sm:text-xl duration-300 price-tag">
-          {{ course.price }}
+          {{ '$' + course.price}}
         </div>
       </div>
     </div>
@@ -32,7 +32,7 @@
       <div class="flex mt-5 justify-between items-center">
         <span class="text-sm text-text font-semibold">
           <i class="fa-solid fa-user p-[5px] text-text mr-0.5"></i>
-          363 students <!-- Students quantity -->
+          {{course.user!.username}}<!-- Students quantity -->
         </span>
         <a href=""
           class="size-[40px] flex justify-center items-center rounded-full bg-buttonBG hover:bg-primary hover:text-white duration-300">

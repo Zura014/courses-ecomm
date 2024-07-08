@@ -10,8 +10,9 @@ import { CoursesService } from './courses.service';
 export class CoursesComponent {
   courses: any;
   constructor(private coursesService: CoursesService) { 
-    this.coursesService.getCourses(1).subscribe((courses) => {
-      this.courses = courses;
+    this.coursesService.getCourses(1).subscribe((data) => {
+      this.courses = data.courses;
+      console.log(this.courses);
     });
   }
 }

@@ -1,11 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  catchError,
-  Observable,
-  tap,
-  throwError,
-} from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 interface UserI {
@@ -24,7 +19,7 @@ export class AuthService {
   private _forgotPassUrl = 'http://localhost:3000/auth/forgot-password';
   private accessToken: string = '';
   private readonly LAST_ACTIVE_TIME_KEY = 'lastActiveTime';
-  private readonly AUTO_LOGOUT_TIME = Math.floor(10 * 1000); //! time in seconds multiplied by 1000 miliseconds
+  private readonly AUTO_LOGOUT_TIME = Math.floor(3 * 1000); //! time in seconds multiplied by 1000 miliseconds
 
   constructor(
     private http: HttpClient,
@@ -74,7 +69,7 @@ export class AuthService {
     const currentTime = Date.now();
     const timeElapsed = currentTime - parseInt(lastActiveTime, 10);
 
-    if (timeElapsed > this.AUTO_LOGOUT_TIME) {
+    if (timeElapsed > this.AUTO_LOGOUT_TIME && (lastActiveTime || token)) {
       this.logOut();
     }
   }
