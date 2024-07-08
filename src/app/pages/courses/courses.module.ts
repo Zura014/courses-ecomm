@@ -24,17 +24,19 @@ import { ReactiveFormsModule } from '@angular/forms';
       {
         path: '',
         component: CoursesComponent,
-        children: [
-          {
-            path: ':id',
-            component: CourseDetailsComponent
-          }
-        ]
+      },
+      {
+        path: 'details/:id',
+        component: CourseDetailsComponent,
+      },
+      {
+        path: 'edit/:id',
+        component: EditCourseComponent,
       },
       {
         path: 'create',
         component: CreateCourseComponent, //!!!! bug right here Routing needs fixing
-      } //!!! Also don't forget to make create edit and fetch for courses.
+      } // !!! Also don't forget to make create edit and fetch for courses.
     ])
   ],
   exports: [

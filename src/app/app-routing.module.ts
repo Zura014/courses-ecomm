@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 const routes: Routes = [
   {
     path: '',
@@ -23,6 +24,10 @@ const routes: Routes = [
       import('./pages/auth/auth.module').then((m) => m.AuthModule),
     title: 'Edumel - Authorization Page',
   },
+  {
+    path: 'profile',
+    component: ProfileComponent
+  }
   // {
   //   path: 'profile',
   //   loadComponent: () =>
