@@ -26,15 +26,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: ProfileComponent
-  }
-  // {
-  //   path: 'profile',
-  //   loadComponent: () =>
-  //     import('./pages/profile/profile.component').then(
-  //       (m) => m.ProfileComponent,
-  //     ),
-  // },
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfileModule),
+  },
 ];
 @NgModule({ imports: [RouterModule.forRoot(routes)], exports: [RouterModule] })
 export class AppRoutingModule {}

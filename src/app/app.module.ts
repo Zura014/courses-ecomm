@@ -16,8 +16,6 @@ import { NavigationStart, Router } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './pages/auth/auth.module';
 import { CoursesModule } from './pages/courses/courses.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProfileComponent } from './pages/profile/profile.component';
 
 
 @NgModule({
@@ -26,7 +24,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
     HomeComponent,
     AboutComponent,
     CoursesComponent,
-    ProfileComponent
   ],
   imports: [
     BrowserModule,
